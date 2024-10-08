@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var operatorButton: UIButton!
     
-    func showAlert(message:String) {
-        let alert = UIAlertController(title:"알림", message:"\(message)", preferredStyle: .alert)
+    func showAlert(message:String, title:String) {
+        let alert = UIAlertController(title:title, message:"\(message)", preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title:"확인", style:.default) // 얼럿에 확인 버튼 추가
+        let okAction = UIAlertAction(title:title, style:.default) // 얼럿에 확인 버튼 추가
         alert.addAction(okAction)
         
         present(alert, animated: true)
@@ -63,19 +63,19 @@ class ViewController: UIViewController {
         
         guard let text = firstOperandField.text, let a = Int(text) else {
             
-            showAlert(message:"값을 입력해주세요")
+            showAlert(message:"값을 입력해주세요", title:"오류")
             return
         }
         
         guard let text = secondOperandField.text, let b = Int(text) else {
             
-            showAlert(message:"값을 입력해주세요")
+            showAlert(message:"값을 입력해주세요", title:"오류")
             return
         }
         
         guard let op = operatorButton.title(for:.normal), op != "?" else {
             
-            showAlert(message:"연산자를 선택해주세요")
+            showAlert(message:"연산자를 선택해주세요", title:"오류")
             return
         }
         

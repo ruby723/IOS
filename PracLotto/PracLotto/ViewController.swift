@@ -17,64 +17,47 @@ class ViewController: UIViewController {
     @IBOutlet weak var number6Label: UILabel!
     @IBOutlet weak var number7Label: UILabel!
     
+    @IBOutlet var labels: [UILabel]!
     
-    
+    // 화면 호출 시마다 자동 호출
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-//        let rnd1 = Int.random(in: 1...45)
-//        number1Label.text = "\(rnd1)"
-//        switch rnd1 {
-//        case 1...10 :
-//            number1Label.backgroundColor = UIColor.yellow
-//            number1Label.textColor = UIColor.black
-//        case 11...20 :
-//            number1Label.backgroundColor = UIColor.blue
-//            number1Label.textColor = UIColor.white
-//        case 21...30 :
-//            number1Label.backgroundColor = UIColor.red
-//            number1Label.textColor = UIColor.white
-//        case 31...40 :
-//            number1Label.backgroundColor = UIColor.gray
-//            number1Label.textColor = UIColor.white
-//        case 21...45 :
-//            number1Label.backgroundColor = UIColor.green
-//            number1Label.textColor = UIColor.black
-//        
-//        default :
-//            break
-//        }
-//        
-//        let rnd2 = Int.random(in: 1...45)
-//        number2Label.text = "\(rnd2)"
-//        switch rnd2 {
-//        case 1...10 :
-//            number2Label.backgroundColor = UIColor.yellow
-//            number2Label.textColor = UIColor.black
-//        case 11...20 :
-//            number2Label.backgroundColor = UIColor.blue
-//            number2Label.textColor = UIColor.white
-//        case 21...30 :
-//            number2Label.backgroundColor = UIColor.red
-//            number2Label.textColor = UIColor.white
-//        case 31...40 :
-//            number2Label.backgroundColor = UIColor.gray
-//            number2Label.textColor = UIColor.white
-//        case 21...45 :
-//            number2Label.backgroundColor = UIColor.green
-//            number2Label.textColor = UIColor.black
-//        
-//        default :
-//            break
-//        }
+    }
+    
+    // 화면 회전 시 자동 호출
+    override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
+        coordinator.animate { _ in
+            
+            for label in self.labels {
+                label.layer.cornerRadius = label.bounds.width/2
+                label.clipsToBounds = true
+                
+            }
+        }
+    }
+    
+    func getColors(from number: Int?) -> (backgroundColor : UIColor, textColor : UIColor) {
+        switch number ?? 0 {
+            case 1...10 :
+                return(UIColor.yellow, UIColor.black)
+            case 11...20 :
+                return(UIColor.blue, UIColor.white)
+            case 21...30 :
+                return(UIColor.red, UIColor.white)
+            case 31...40 :
+                return(UIColor.gray, UIColor.white)
+            case 21...45 :
+                return(UIColor.green, UIColor.black)
+            default :
+                return (UIColor.purple, UIColor.white)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let labels = [number1Label!, number2Label!, number3Label!, number4Label!, number5Label!, number6Label!, number7Label!]
         
         var nums = [Int]()
         while nums.count < labels.count {
@@ -84,37 +67,23 @@ class ViewController: UIViewController {
             }
         }
         
-        let sortedNums = nums.sorted()
+        nums.sort()
+        
+//        let sortedNums = nums.sorted()
         for (index, label) in labels.enumerated() {
             label.layer.cornerRadius = label.bounds.width/2
             label.clipsToBounds = true
             
-            label.text = "\(sortedNums[index])"
+            label.text = "\(nums[index])"
             
-            switch sortedNums[index] {
-            case 1...10 :
-                label.backgroundColor = UIColor.yellow
-                label.textColor = UIColor.black
-            case 11...20 :
-                label.backgroundColor = UIColor.blue
-                label.textColor = UIColor.white
-            case 21...30 :
-                label.backgroundColor = UIColor.red
-                label.textColor = UIColor.white
-            case 31...40 :
-                label.backgroundColor = UIColor.gray
-                label.textColor = UIColor.white
-            case 21...45 :
-                label.backgroundColor = UIColor.green
-                label.textColor = UIColor.black
+            label.backgroundColor = getColors(from: nums[index]).0
+            label.textColor = getColors(from: nums[index]).1
             
-            default :
-                break
-            }
-            
-            number7Label.backgroundColor = UIColor.purple
-            number7Label.textColor = UIColor.white
         }
+        
+        let colors = getColors(from: nil)
+        number7Label.backgroundColor = colors.backgroundColor
+        number7Label.textColor = colors.textColor
         
 //        number1Label.layer.cornerRadius = number1Label.bounds.width/2
 //        number1Label.clipsToBounds = true

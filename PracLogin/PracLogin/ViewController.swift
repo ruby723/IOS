@@ -13,10 +13,25 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var passwordField: UITextField!
     
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "알림", message: "\(message)", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style:.default)
+        alert.addAction(okAction)
+        
+        present(alert, animated: true)
+    }
     
     @IBAction func login(_ sender: Any) {
-        let id = idField.text!
-        let password = passwordField.text!
+//        let id = idField.text!
+        guard let id = idField.text, !id.isEmpty else {
+            showAlert(message:"아이디를 입력해주세요")
+            return
+        }
+//        let password = passwordField.text!
+        guard let password = passwordField.text, !id.isEmpty else {
+            showAlert(message:"비밀번호를 입력해주세요")
+            return
+        }
         
         //kxcoding
         //1234
@@ -43,6 +58,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    }
+    
+    // 화면이 표시 된 직후에 작동하는 메소드
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        idField.becomeFirstResponder()// 커서
     }
 
 

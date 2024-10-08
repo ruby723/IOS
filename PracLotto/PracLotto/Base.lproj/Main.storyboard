@@ -99,6 +99,13 @@
                         <outlet property="number5Label" destination="z8l-8D-tWx" id="Tum-tq-jVE"/>
                         <outlet property="number6Label" destination="9GH-1A-KMO" id="BxL-74-Wks"/>
                         <outlet property="number7Label" destination="DS9-z7-ask" id="pCd-9Y-nCl"/>
+                        <outletCollection property="labels" destination="Ekp-Dj-a70" collectionClass="NSMutableArray" id="znA-nr-jh1"/>
+                        <outletCollection property="labels" destination="ns6-Oq-C6M" collectionClass="NSMutableArray" id="VMe-jD-Upd"/>
+                        <outletCollection property="labels" destination="6ek-tz-r99" collectionClass="NSMutableArray" id="xOy-ge-rut"/>
+                        <outletCollection property="labels" destination="xUI-nh-WW0" collectionClass="NSMutableArray" id="dId-58-TFX"/>
+                        <outletCollection property="labels" destination="z8l-8D-tWx" collectionClass="NSMutableArray" id="MDB-L9-RgK"/>
+                        <outletCollection property="labels" destination="9GH-1A-KMO" collectionClass="NSMutableArray" id="vyo-fE-GlR"/>
+                        <outletCollection property="labels" destination="DS9-z7-ask" collectionClass="NSMutableArray" id="HIo-mu-aHo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
